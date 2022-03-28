@@ -1,0 +1,2 @@
+SF_USER=op://private/snowflake-credentials/username
+SF_PASSWORD=op://private/snowflake-credentials/password
