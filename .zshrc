@@ -63,12 +63,10 @@ export PATH=${PATH}:${GOPATH}/bin
 # added by travis gem
 [ -f /Users/vkotcherlakota/.travis/travis.sh ] && source /Users/vkotcherlakota/.travis/travis.sh
 
+COMPLETION_WAITING_DOTS="true"
+
 export PATH="/usr/local/opt/node@10/bin:$PATH"
-
 export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
-
-export JENKINS_EMAIL=vkotcherlakota@nerdwallet.com
-export JENKINS_API_TOKEN=
 
 function dockerlogin(){
 
