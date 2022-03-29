@@ -1,0 +1,27 @@
+#!/bin/bash
+
+cat <<-"EOT" | op inject | pbcopy
+(
+cd ~
+git config --global user.name "Vishal Kotcherlakota"
+git config --global user.email vkotcherlakota@nerdwallet.com
+git clone https://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
+~/.scm_breeze/install.sh
+
+cat <<EOF  >>$HOME/bashrc
+export EDITOR=vim
+EOF
+
+)
+source ~/.bashrc 
+
+touch  ~/.ssh/id_rsa || echo "skipping."
+chmod 600  ~/.ssh/id_rsa
+cat <<EOF > ~/.ssh/id_rsa
+op://private/cloud9-ssh/private key
+EOF
+
+EOT
+
+echo "copied init script to clipboard"
+

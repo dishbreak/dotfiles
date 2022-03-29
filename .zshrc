@@ -23,6 +23,7 @@ cmd_exec_time
 BULLETTRAIN_CONTEXT_HOSTNAME=local
 
 PATH=${HOME}/bin:${PATH}
+PATH=${HOME}/scripts:${PATH}
 PATH=/usr/local/go/bin:${PATH}
 PATH=/usr/local/aws/bin:${PATH}
 
