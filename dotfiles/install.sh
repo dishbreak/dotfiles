@@ -10,9 +10,16 @@ mv .zshrc .zshrc.bak || echo "no .zshrc"
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 echo ".cfg" >> .gitignore
 
-git clone --bare git@github.com:dishbreak/dotfiles.git $HOME/.cfg
+CONF_DIR="$HOME/.cfg"
 
-config checkout
+if [[ -d "$CONF_DIR" ]]; then
+    echo "removing prior config dir"
+    rm -rf "$CONF_DIR"
+fi
+
+git clone --bare git@github.com:dishbreak/dotfiles.git "$CONF_DIR"
+
+config checkout -f
 
 echo "installing zshrc"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
