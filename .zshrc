@@ -61,9 +61,6 @@ export AWS_EC2_METADATA_DISABLED=true
 export GOPATH=${HOME}/go
 export PATH=${PATH}:${GOPATH}/bin
 
-# added by travis gem
-[ -f /Users/vkotcherlakota/.travis/travis.sh ] && source /Users/vkotcherlakota/.travis/travis.sh
-
 COMPLETION_WAITING_DOTS="true"
 
 export PATH="/usr/local/opt/node@10/bin:$PATH"
@@ -91,7 +88,5 @@ export SF_ACCOUNT=nerdwallet
 
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
-# Homebrew
-export GOROOT="$(brew --prefix golang)/libexec"
 
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
