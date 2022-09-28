@@ -47,6 +47,10 @@ fi
 echo "installing oh-my-zsh"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
 
+BULLETTRAIN_THEME_PATH="$OMZ_DIR/themes/bullet-train.zsh-theme"
+curt "http://raw.github.com/caiogondim/bullet-train-oh-my-zsh-theme/master/bullet-train.zsh-theme" -o "$BULLETTRAIN_THEME_PATH"
+chmod 655 "$BULLETTRAIN_THEME_PATH"
+
 SCMB_DIR="$HOME/.scm_breeze"
 if [[ -d "$SCMB_DIR"]]; then
     echo "removing scm breeze dir"
