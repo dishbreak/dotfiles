@@ -35,9 +35,11 @@ esac
 "$BREWCMD" install rbenv pyenv
 
 # AWS CLI tools
+if ! which aws; then
 curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
 sudo installer -pkg AWSCLIV2.pkg -target /
 rm -f "AWSCLIV2.pkg"
+fi
 
 OMZ_DIR="$HOME/.oh-my-zsh"
 if [[ -d "$OMZ_DIR" ]]; then 
