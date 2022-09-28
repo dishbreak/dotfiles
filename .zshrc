@@ -1,5 +1,5 @@
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="bullet-train"
+ZSH_THEME="awesomepanda"
 
 plugins=(git)
 
