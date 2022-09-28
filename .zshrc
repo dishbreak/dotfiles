@@ -11,7 +11,7 @@ alias tfcopy="terraform show -no-color tf.plan | pbcopy"
 alias tfpeek="terraform show tf.plan | less"
 alias tfresh="(cd ~/src/terraform-aws && indy deps)"
 
-if [["$(uname -m)" == "arm64"]]; then
+if [[ "$(uname -m)" == "arm64" ]]; then
   alias abrew="/opt/homebrew/bin/brew"
   PATH="${PATH}:/opt/homebrew/bin"
 fi
