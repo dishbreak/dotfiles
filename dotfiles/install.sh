@@ -16,9 +16,28 @@ if [[ -d "$CONF_DIR" ]]; then
     rm -rf "$CONF_DIR"
 fi
 
+# --bare flag here lets us check out the repo without the working dir
 git clone --bare git@github.com:dishbreak/dotfiles.git "$CONF_DIR"
 
+# config alias checks out files to the home dir, and -f overwrites existing files (useful for reinstall)
 config checkout -f
+
+BREWCMD="brew_not_found"
+case "$(uname -m)" in 
+    arm64)
+        BREWCMD="/opt/homebrew/bin/brew"
+        ;;
+    amd64)
+        BREWCMD="/usr/local/bin/brew"
+        ;;
+esac
+
+"$BREWCMD" install rbenv pyenv
+
+# AWS CLI tools
+curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+sudo installer -pkg AWSCLIV2.pkg -target /
+rm -f "AWSCLIV2.pkg"
 
 OMZ_DIR="$HOME/.oh-my-zsh"
 if [[ -d "$OMZ_DIR" ]]; then 

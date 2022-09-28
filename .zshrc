@@ -44,7 +44,6 @@ setopt sh_word_split
 
 source /usr/local/bin/aws_zsh_completer.sh
 alias dockernuke='docker kill $(docker ps -q)'
-alias s='subl .'
 alias g='gomilk'
 alias ifil='indy format && indy lint'
 alias zshrc='vim ~/.zshrc'
