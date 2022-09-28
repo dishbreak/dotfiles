@@ -1,4 +1,4 @@
-export ZSH="/Users/vkotcherlakota/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="bullet-train"
 
 plugins=(git)
