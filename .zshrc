@@ -56,7 +56,6 @@ set_profile() {
 
 #AWS settings
 export AWS_DEFAULT_REGION=us-east-1
-export AWSLOGIN_ROLE=admin
 export AWS_EC2_METADATA_DISABLED=true
 
 [ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
