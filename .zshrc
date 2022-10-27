@@ -93,3 +93,7 @@ export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
+function mypath() {
+	echo $PATH | tr ':' '\n'
+}
