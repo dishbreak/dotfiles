@@ -32,7 +32,7 @@ case "$(uname -m)" in
         ;;
 esac
 
-"$BREWCMD" install rbenv pyenv
+"$BREWCMD" install rbenv pyenv shellcheck
 
 # AWS CLI tools
 if ! which aws; then
