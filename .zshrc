@@ -69,6 +69,10 @@ COMPLETION_WAITING_DOTS="true"
 export PATH="/usr/local/opt/node@10/bin:$PATH"
 export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 
+function putdir() {
+    mkdir "$1" && cd "$1"
+}
+
 function dockerlogin(){
 
     REGION=${ECR_REGION:-us-east-1}
