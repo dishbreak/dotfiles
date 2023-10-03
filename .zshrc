@@ -101,3 +101,9 @@ alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 function mypath() {
 	echo $PATH | tr ':' '\n'
 }
+
+alias k=kubectl
+[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
+function kcurl() {
+	k debug -it "$1" --image docker.nerdwallet.io/curlimages/curl -- sh
+} 
