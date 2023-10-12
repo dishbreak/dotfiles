@@ -1,4 +1,5 @@
 amazonwebservices.aws-toolkit-vscode
+casualjim.gotemplate
 CS50.vscode-presentation-mode
 eamodio.gitlens
 github.vscode-github-actions
@@ -6,6 +7,7 @@ GitHub.vscode-pull-request-github
 golang.go
 GrapeCity.gc-excelviewer
 hashicorp.terraform
+leodevbro.blockman
 ms-azuretools.vscode-docker
 ms-kubernetes-tools.vscode-kubernetes-tools
 ms-python.black-formatter
@@ -23,9 +25,11 @@ ms-vscode-remote.remote-ssh-edit
 ms-vscode.makefile-tools
 ms-vscode.remote-explorer
 ms-vscode.sublime-keybindings
+oderwat.indent-rainbow
 redhat.vscode-yaml
 ryanolsonx.zenburn
 SimonSiefke.svg-preview
 stkb.rewrap
 technosophos.vscode-make
+Tim-Koehler.helm-intellisense
 timonwong.shellcheck
