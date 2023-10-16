@@ -6,7 +6,7 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 alias idd="indy deps && indy develop"
-alias aa="awslogin admin"
+alias asl="aws sso login"
 alias tfcopy="terraform show -no-color tf.plan | pbcopy"
 alias tfpeek="terraform show tf.plan | less"
 alias tfresh="(cd ~/src/terraform-aws && indy deps)"
@@ -107,3 +107,5 @@ alias k=kubectl
 function kcurl() {
 	k debug -it "$1" --image docker.nerdwallet.io/curlimages/curl -- sh
 } 
+export KUBE_EDITOR='code --wait'
+
