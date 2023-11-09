@@ -32,10 +32,6 @@ PATH=${HOME}/scripts:${PATH}
 PATH=/usr/local/go/bin:${PATH}
 PATH=/usr/local/aws/bin:${PATH}
 
-export PATH="${HOME}/.rbenv/shims:${PATH}"
-eval "$(rbenv init -)"
-rbenv shell 2.4.1
-
 export PATH="/Users/vkotcherlakota/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
