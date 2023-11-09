@@ -32,7 +32,8 @@ case "$(uname -m)" in
         ;;
 esac
 
-"$BREWCMD" install rbenv pyenv shellcheck
+"$BREWCMD" install pyenv shellcheck pyenv-virtualenv
+
 
 # AWS CLI tools
 if ! which aws; then
@@ -61,4 +62,3 @@ fi
 echo "install scm_breeze"
 git clone https://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
 ~/.scm_breeze/install.sh
-
