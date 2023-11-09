@@ -42,7 +42,10 @@ eval "$(pyenv virtualenv-init -)"
 
 setopt sh_word_split
 
-source /usr/local/bin/aws_zsh_completer.sh
+autoload bashcompinit && bashcompinit
+autoload -Uz compinit && compinit
+complete -C '/usr/local/bin/aws_completer' aws
+
 alias dockernuke='docker kill $(docker ps -q)'
 alias g='gomilk'
 alias ifil='indy format && indy lint'
