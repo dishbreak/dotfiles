@@ -22,6 +22,9 @@ git clone --bare git@github.com:dishbreak/dotfiles.git "$CONF_DIR"
 # config alias checks out files to the home dir, and -f overwrites existing files (useful for reinstall)
 config checkout -f
 
+# install homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
 BREWCMD="brew_not_found"
 case "$(uname -m)" in 
     arm64)
@@ -62,3 +65,11 @@ fi
 echo "install scm_breeze"
 git clone https://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
 ~/.scm_breeze/install.sh
+
+cat <<EOF
+Reminder: install the following manually
+VSCode: Download Visual Studio Code at https://go.microsoft.com/fwlink/?LinkID=534106
+Sidekick: Download Sideckick at https://www.meetsidekick.com/download/
+Bitwarden: Download Bitwarden at https://bitwarden.com/download/#downloads-desktop
+Logseq: Download Logseq at https://logseq.com/downloads
+EOF
