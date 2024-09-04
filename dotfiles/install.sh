@@ -32,7 +32,7 @@ case "$(uname -m)" in
         ;;
 esac
 
-"$BREWCMD" install pyenv shellcheck pyenv-virtualenv
+"$BREWCMD" install pyenv shellcheck pyenv-virtualenv nvm
 
 
 # AWS CLI tools
