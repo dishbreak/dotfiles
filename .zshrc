@@ -32,10 +32,6 @@ PATH=${HOME}/scripts:${PATH}
 PATH=/usr/local/go/bin:${PATH}
 PATH=/usr/local/aws/bin:${PATH}
 
-export PATH="/Users/vkotcherlakota/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
 setopt sh_word_split
 
 autoload bashcompinit && bashcompinit
