@@ -27,7 +27,7 @@ config checkout -f
 # install homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-/opt/homebrew/bin/brew install shellcheck nvm 1password-cli gh
+/opt/homebrew/bin/brew install shellcheck nvm 1password-cli gh direnv
 
 # install uv
 # NB we set NO_MODIFY_PATH because our dotfile should already have that set up.
