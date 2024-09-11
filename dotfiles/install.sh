@@ -58,6 +58,7 @@ if [[ -d "$OMZ_DIR" ]]; then
     rm -rf "$OMZ_DIR"
 fi
 echo "installing oh-my-zsh"
+export RUNZSH=no # don't exec ZSH in the installer pls
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
 
 BULLETTRAIN_THEME_PATH="$OMZ_DIR/themes/bullet-train.zsh-theme"
