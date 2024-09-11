@@ -1,5 +1,5 @@
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="awesomepanda"
+ZSH_THEME="arrow" # set by `omz`
 
 plugins=(git)
 
