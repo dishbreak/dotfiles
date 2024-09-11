@@ -25,17 +25,13 @@ config checkout -f
 # install homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-BREWCMD="brew_not_found"
-case "$(uname -m)" in 
-    arm64)
-        BREWCMD="/opt/homebrew/bin/brew"
-        ;;
-    amd64)
-        BREWCMD="/usr/local/bin/brew"
-        ;;
-esac
+brew install shellcheck nvm
 
-"$BREWCMD" install pyenv shellcheck pyenv-virtualenv nvm
+# install uv
+# NB we set NO_MODIFY_PATH because our dotfile should already have that set up.
+curl -LsSf https://astral.sh/uv/install.sh -o install.sh
+chmod u+x install.sh
+INSTALLER_NO_MODIFY_PATH=yes ./install.sh
 
 
 # AWS CLI tools
