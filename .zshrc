@@ -98,7 +98,7 @@ function mypath() {
 }
 
 alias k=kubectl
-[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
+source <(kubectl completion zsh)
 function kcurl() {
 	k debug -it "$1" --image docker.nerdwallet.io/curlimages/curl -- sh
 } 
