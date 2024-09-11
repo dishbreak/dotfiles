@@ -25,9 +25,11 @@ git clone --bare git@github.com:dishbreak/dotfiles.git "$CONF_DIR"
 config checkout -f
 
 # install homebrew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+if ! which brew; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
 
-/opt/homebrew/bin/brew install shellcheck nvm 1password-cli gh direnv
+/opt/homebrew/bin/brew install shellcheck nvm 1password-cli gh direnv derailed/k9s/k9s kubectx kubectl
 
 # install uv
 # NB we set NO_MODIFY_PATH because our dotfile should already have that set up.
