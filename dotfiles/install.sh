@@ -82,6 +82,9 @@ Logseq: Download Logseq at https://logseq.com/downloads
 Alfred 5: Download Alfred at https://www.alfredapp.com/
 Mimestream: Download at https://mimestream.com/
 Telegram: Download at https://macos.telegram.org/
+f.lux: Download at https://justgetflux.com/
+Spotify: Download at https://www.spotify.com/de-en/download/mac/
+
 
 After installing VSCode, run ./setup.sh from ~/dotfiles/vscode
 EOF
