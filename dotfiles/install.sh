@@ -42,6 +42,8 @@ chmod u+x install-ruff.sh
 INSTALLER_NO_MODIFY_PATH=yes ./install-ruff.sh
 rm install-ruff.sh
 
+# install Pythons
+"$HOME/.cargo/bin/uv" python install 3.9 3.10 3.12
 
 # AWS CLI tools
 if ! which aws; then
