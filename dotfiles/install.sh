@@ -25,7 +25,7 @@ config checkout -f
 # install homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-brew install shellcheck nvm
+brew install shellcheck nvm 1password-cli
 
 # install uv
 # NB we set NO_MODIFY_PATH because our dotfile should already have that set up.
@@ -70,9 +70,14 @@ git clone https://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
 ~/.scm_breeze/install.sh
 
 cat <<EOF
-Reminder: install the following manually
+** Reminder: install the following manually
 VSCode: Download Visual Studio Code at https://go.microsoft.com/fwlink/?LinkID=534106
 Sidekick: Download Sideckick at https://www.meetsidekick.com/download/
 Bitwarden: Download Bitwarden at https://bitwarden.com/download/#downloads-desktop
 Logseq: Download Logseq at https://logseq.com/downloads
+Alfred 5: Download Alfred at https://www.alfredapp.com/
+Mimestream: Download at https://mimestream.com/
+Telegram: Download at https://macos.telegram.org/
+
+After installing VSCode, run ./setup.sh from ~/dotfiles/vscode
 EOF
