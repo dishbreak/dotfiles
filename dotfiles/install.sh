@@ -29,9 +29,16 @@ brew install shellcheck nvm
 
 # install uv
 # NB we set NO_MODIFY_PATH because our dotfile should already have that set up.
-curl -LsSf https://astral.sh/uv/install.sh -o install.sh
-chmod u+x install.sh
-INSTALLER_NO_MODIFY_PATH=yes ./install.sh
+curl -LsSf https://astral.sh/uv/install.sh -o install-uv.sh
+chmod u+x install-uv.sh
+INSTALLER_NO_MODIFY_PATH=yes ./install-uv.sh
+rm install-uv.sh
+
+# install ruff
+curl -LsSf https://astral.sh/ruff/install.sh -o install-ruff.sh
+chmod u+x install-ruff.sh
+INSTALLER_NO_MODIFY_PATH=yes ./install-ruff.sh
+rm install-ruff.sh
 
 
 # AWS CLI tools
