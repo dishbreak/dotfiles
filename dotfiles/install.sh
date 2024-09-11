@@ -16,6 +16,8 @@ if [[ -d "$CONF_DIR" ]]; then
     rm -rf "$CONF_DIR"
 fi
 
+mkdir "$HOME/bin"
+
 # --bare flag here lets us check out the repo without the working dir
 git clone --bare git@github.com:dishbreak/dotfiles.git "$CONF_DIR"
 
