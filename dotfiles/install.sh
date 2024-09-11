@@ -16,7 +16,7 @@ if [[ -d "$CONF_DIR" ]]; then
     rm -rf "$CONF_DIR"
 fi
 
-mkdir "$HOME/bin"
+mkdir -p "$HOME/bin"
 
 # --bare flag here lets us check out the repo without the working dir
 git clone --bare git@github.com:dishbreak/dotfiles.git "$CONF_DIR"
@@ -27,7 +27,7 @@ config checkout -f
 # install homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-brew install shellcheck nvm 1password-cli
+/opt/homebrew/bin/brew install shellcheck nvm 1password-cli gh
 
 # install uv
 # NB we set NO_MODIFY_PATH because our dotfile should already have that set up.
