@@ -29,7 +29,16 @@ if ! which brew; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
-/opt/homebrew/bin/brew install shellcheck nvm 1password-cli gh direnv derailed/k9s/k9s kubectx kubectl
+/opt/homebrew/bin/brew install \
+	shellcheck \
+	nvm \
+	1password-cli \
+	gh \
+	direnv \
+	derailed/k9s/k9s \
+	kubectx \
+	kubectl \
+	jq
 
 # install uv
 # NB we set NO_MODIFY_PATH because our dotfile should already have that set up.
