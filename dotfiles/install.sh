@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -ex
 
 echo "moving existing config files"
 
@@ -23,6 +23,29 @@ git clone --bare git@github.com:dishbreak/dotfiles.git "$CONF_DIR"
 
 # config alias checks out files to the home dir, and -f overwrites existing files (useful for reinstall)
 config checkout -f
+
+ handy utility to download an artifact off the latest release
+function latest_github_release() {
+	GITHUB_REPO_SLUG=$1
+	ARTIFACT_NAME=$2
+	VERSION=${3:-latest}
+	JQ_QUERY=".assets[] | select(.name==\"$ARTIFACT_NAME\") | .browser_download_url"
+	GITHUB_API_ENDPOINT="https://api.github.com/repos/${GITHUB_REPO_SLUG}/releases/${VERSION}"
+	curl -s "${GITHUB_API_ENDPOINT}" | jq -r "$JQ_QUERY"
+}
+
+# download and install the latest pkg from github
+function download_and_install_pkg_from_github() {
+	GITHUB_REPO_SLUG=$1
+	ARTIFACT_NAME=$2
+	VERSION=${3:-latest}
+	
+	DOWNLOAD_URL="$(latest_github_release "$GITHUB_REPO_SLUG" "$ARTIFACT_NAME" "$VERSION")"
+	echo downloading $DOWNLOAD_URL to $ARTIFACT_NAME
+	curl -LsSf "$(latest_github_release "$GITHUB_REPO_SLUG" "$ARTIFACT_NAME" "$VERSION")" -o "$ARTIFACT_NAME"
+	sudo installer -pkg "./$ARTIFACT_NAME" -target /
+	rm -f "$ARTIFACT_NAME"
+}
 
 # install homebrew
 if ! which brew; then
@@ -73,13 +96,20 @@ export RUNZSH=no # don't exec ZSH in the installer pls
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
 
 SCMB_DIR="$HOME/.scm_breeze"
-if [[ -d "$SCMB_DIR"]]; then
+if [[ -d "$SCMB_DIR" ]]; then
     echo "removing scm breeze dir"
     rm -rf "$SCMB_DIR"
 fi
 echo "install scm_breeze"
 git clone https://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
 ~/.scm_breeze/install.sh
+
+# install podman cli
+download_and_install_pkg_from_github "containers/podman" "podman-installer-macos-arm64.pkg"
+PODMAN_CMD="/opt/podman/bin/podman"
+if ! "$PODMAN_CMD" machine inspect podman-machine-default; then 
+	"$PODMAN_CMD" machine init --disk-size 30 --memory 4096 podman-machine-default
+fi
 
 cat <<EOF
 ** Reminder: install the following manually
@@ -93,7 +123,6 @@ Telegram: Download at https://macos.telegram.org/
 f.lux: Download at https://justgetflux.com/
 Spotify: Download at https://www.spotify.com/de-en/download/mac/
 Podman Desktop: Download at https://podman.io/
-
 
 After installing VSCode, run ./setup.sh from ~/dotfiles/vscode
 EOF

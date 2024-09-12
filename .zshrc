@@ -111,3 +111,7 @@ eval "$(direnv hook zsh)"
   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 export PATH="$HOME/.cargo/bin:$PATH"
+
+[ -s "/Users/vishal/.scm_breeze/scm_breeze.sh" ] && source "/Users/vishal/.scm_breeze/scm_breeze.sh"
+
+export PATH="/opt/podman/bin:$PATH"
