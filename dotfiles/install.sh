@@ -104,6 +104,17 @@ echo "install scm_breeze"
 git clone https://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
 ~/.scm_breeze/install.sh
 
+# install go
+INSTALL_GO_VERSION="1.23.1"
+GO_PKG_FILENAME="go${INSTALL_GO_VERSION}.darwin-arm64.pkg"
+curl -LsSf "https://go.dev/dl/$GO_PKG_FILENAME" -o "$PKG_FILENAME"
+sudo installer -pkg "./$GO_PKG_FILENAME" -target /
+
+# install kind
+curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.24.0/kind-darwin-arm64
+chmod +x ./kind
+mv ./kind /usr/local/bin/kind
+
 # install podman cli
 download_and_install_pkg_from_github "containers/podman" "podman-installer-macos-arm64.pkg"
 PODMAN_CMD="/opt/podman/bin/podman"
