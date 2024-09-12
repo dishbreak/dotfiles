@@ -92,6 +92,7 @@ Mimestream: Download at https://mimestream.com/
 Telegram: Download at https://macos.telegram.org/
 f.lux: Download at https://justgetflux.com/
 Spotify: Download at https://www.spotify.com/de-en/download/mac/
+Podman Desktop: Download at https://podman.io/
 
 
 After installing VSCode, run ./setup.sh from ~/dotfiles/vscode
