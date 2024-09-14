@@ -100,15 +100,18 @@ INSTALL_GO_VERSION="1.23.1"
 GO_VERSION_CHECK=$(go version | grep "go version go$INSTALL_GO_VERSION darwin/arm64")
 if [[ -z "$GO_VERSION_CHECK" ]]; then
 	GO_PKG_FILENAME="go${INSTALL_GO_VERSION}.darwin-arm64.pkg"
-	curl -LsSf "https://go.dev/dl/$GO_PKG_FILENAME" -o "$PKG_FILENAME"
+	curl -LsSf "https://go.dev/dl/$GO_PKG_FILENAME" -o "$GO_PKG_FILENAME"
 	sudo installer -pkg "./$GO_PKG_FILENAME" -target /
 	rm -f "$GO_PKG_FILENAME"
 fi
 
 # install kind
-curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.24.0/kind-darwin-arm64
-chmod +x ./kind
-mv ./kind /usr/local/bin/kind
+echo "installing kind"
+if ! which kind; then
+	curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.24.0/kind-darwin-arm64
+	chmod +x ./kind
+	mv ./kind /usr/local/bin/kind
+fi
 
 # install VSCode
 echo "installing VSCode"
@@ -191,6 +194,7 @@ if [[ ! -d /Applications/Flux.app ]]; then
 fi
 
 # install Telegram
+echo "installing Telegram"
 if [[ ! -d /Applications/Telegram.app ]]; then
 	curl -fsSL "https://osx.telegram.org/updates/Telegram.dmg" -o "Telegram.dmg"
 	sudo hdiutil attach Telegram.dmg
