@@ -6,7 +6,7 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 alias idd="indy deps && indy develop"
-alias asl="aws sso login"
+alias asl='aws sts get-caller-identity --profile nwprod.admin > /dev/null || aws sso login'
 alias tfcopy="terraform show -no-color tf.plan | pbcopy"
 alias tfpeek="terraform show tf.plan | less"
 alias tfresh="(cd ~/src/terraform-aws && indy deps)"
@@ -71,7 +71,7 @@ function putdir() {
 function dockerlogin(){
 
     REGION=${ECR_REGION:-us-east-1}
-    PROFILE=${ECR_PROFILE:-nwprod}
+    PROFILE=${ECR_PROFILE:-nwprod.admin}
 
     aws sts get-caller-identity --profile "$PROFILE" > /dev/null || awslogin admin
 

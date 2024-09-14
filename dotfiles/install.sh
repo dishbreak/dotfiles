@@ -24,28 +24,6 @@ git clone --bare git@github.com:dishbreak/dotfiles.git "$CONF_DIR"
 # config alias checks out files to the home dir, and -f overwrites existing files (useful for reinstall)
 config checkout -f
 
- handy utility to download an artifact off the latest release
-function latest_github_release() {
-	GITHUB_REPO_SLUG=$1
-	ARTIFACT_NAME=$2
-	VERSION=${3:-latest}
-	JQ_QUERY=".assets[] | select(.name==\"$ARTIFACT_NAME\") | .browser_download_url"
-	GITHUB_API_ENDPOINT="https://api.github.com/repos/${GITHUB_REPO_SLUG}/releases/${VERSION}"
-	curl -s "${GITHUB_API_ENDPOINT}" | jq -r "$JQ_QUERY"
-}
-
-# download and install the latest pkg from github
-function download_and_install_pkg_from_github() {
-	GITHUB_REPO_SLUG=$1
-	ARTIFACT_NAME=$2
-	VERSION=${3:-latest}
-	
-	DOWNLOAD_URL="$(latest_github_release "$GITHUB_REPO_SLUG" "$ARTIFACT_NAME" "$VERSION")"
-	echo downloading $DOWNLOAD_URL to $ARTIFACT_NAME
-	curl -LsSf "$(latest_github_release "$GITHUB_REPO_SLUG" "$ARTIFACT_NAME" "$VERSION")" -o "$ARTIFACT_NAME"
-	sudo installer -pkg "./$ARTIFACT_NAME" -target /
-	rm -f "$ARTIFACT_NAME"
-}
 
 # install homebrew
 if ! which brew; then
@@ -61,6 +39,8 @@ fi
 	derailed/k9s/k9s \
 	kubectx \
 	kubectl \
+	postgresql \
+	bitwarden \
 	jq
 
 # install uv
@@ -77,7 +57,17 @@ INSTALLER_NO_MODIFY_PATH=yes ./install-ruff.sh
 rm install-ruff.sh
 
 # install Pythons
-"$HOME/.cargo/bin/uv" python install 3.9 3.10 3.12
+/opt/homebrew/bin/pyenv install 3.9 3.10 3.11
+/opt/homebrew/bin/pyenv global 3.9
+
+# install Docker Desktop
+if ! which docker; then
+	curl -fsSL "https://desktop.docker.com/mac/main/arm64/Docker.dmg" -o "Docker.dmg"
+	sudo hdiutil attach Docker.dmg
+	sudo cp -R "/Volumes/Docker/Docker.app" /Applications
+	sudo hdiutil detach "/Volumes/Docker"
+	rm -f "Docker.dmg"
+fi
 
 # AWS CLI tools
 if ! which aws; then
@@ -105,35 +95,106 @@ git clone https://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
 ~/.scm_breeze/install.sh
 
 # install go
+echo "installing go"
 INSTALL_GO_VERSION="1.23.1"
-GO_PKG_FILENAME="go${INSTALL_GO_VERSION}.darwin-arm64.pkg"
-curl -LsSf "https://go.dev/dl/$GO_PKG_FILENAME" -o "$PKG_FILENAME"
-sudo installer -pkg "./$GO_PKG_FILENAME" -target /
+GO_VERSION_CHECK=$(go version | grep "go version go$INSTALL_GO_VERSION darwin/arm64")
+if [[ -z "$GO_VERSION_CHECK" ]]; then
+	GO_PKG_FILENAME="go${INSTALL_GO_VERSION}.darwin-arm64.pkg"
+	curl -LsSf "https://go.dev/dl/$GO_PKG_FILENAME" -o "$PKG_FILENAME"
+	sudo installer -pkg "./$GO_PKG_FILENAME" -target /
+	rm -f "$GO_PKG_FILENAME"
+fi
 
 # install kind
 curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.24.0/kind-darwin-arm64
 chmod +x ./kind
 mv ./kind /usr/local/bin/kind
 
-# install podman cli
-download_and_install_pkg_from_github "containers/podman" "podman-installer-macos-arm64.pkg"
-PODMAN_CMD="/opt/podman/bin/podman"
-if ! "$PODMAN_CMD" machine inspect podman-machine-default; then 
-	"$PODMAN_CMD" machine init --disk-size 30 --memory 4096 podman-machine-default
+# install VSCode
+echo "installing VSCode"
+if ! which code; then
+	curl -fsSL "https://code.visualstudio.com/sha/download?build=stable&os=darwin-arm64" -o "vscode.zip"
+	unzip vscode.zip
+	mv "Visual Studio Code.app" /Applications
+	rm -f vscode.zip
+
+	curl -fsSL "https://code.visualstudio.com/sha/download?build=stable&os=cli-darwin-arm64" -o "vscode-cli.zip"
+	unzip vscode-cli.zip
+	mv "code" "$HOME/bin"
+	rm -f vscode-cli.zip
+
+	(
+		echo "installing VSCode extensions"
+		cd "$HOME/dotfiles/vscode"
+		./setup.sh install
+	)
 fi
 
-cat <<EOF
-** Reminder: install the following manually
-VSCode: Download Visual Studio Code at https://go.microsoft.com/fwlink/?LinkID=534106
-Sidekick: Download Sideckick at https://www.meetsidekick.com/download/
-Bitwarden: Download Bitwarden at https://bitwarden.com/download/#downloads-desktop
-Logseq: Download Logseq at https://logseq.com/downloads
-Alfred 5: Download Alfred at https://www.alfredapp.com/
-Mimestream: Download at https://mimestream.com/
-Telegram: Download at https://macos.telegram.org/
-f.lux: Download at https://justgetflux.com/
-Spotify: Download at https://www.spotify.com/de-en/download/mac/
-Podman Desktop: Download at https://podman.io/
+# install sidekick browser
+echo "installing sidekick browser"
+if [[ ! -d /Appplications/Sidekick.app ]]; then
+	curl -fsSL "https://api.meetsidekick.com/downloads/macm1" -o "sidekick.dmg"
+	sudo hdiutil attach sidekick.dmg
+	sudo cp -R "/Volumes/Sidekick/Sidekick.app" /Applications
+	sudo hdiutil detach "/Volumes/Sidekick"
+	rm -f "sidekick.dmg"
+fi
 
-After installing VSCode, run ./setup.sh from ~/dotfiles/vscode
-EOF
+# install Logseq
+echo "installing Logseq"
+if [[ ! -d /Applications/Logseq.app ]]; then
+	curl -fsSL "https://github.com/logseq/logseq/releases/download/0.10.9/Logseq-darwin-arm64-0.10.9.dmg" -o "Logseq.dmg"
+	sudo hdiutil attach Logseq.dmg
+	sudo cp -R "/Volumes/Logseq/Logseq.app" /Applications
+	sudo hdiutil detach "/Volumes/Logseq"
+	rm -f "Logseq.dmg"
+fi
+
+# install Alfred 5
+ALFRED_VERSION="5.5_2257"
+echo "installing Alfred 5"
+if [[ ! -d /Applications/Alfred\ 5.app ]]; then
+	curl -fsSL "https://cachefly.alfredapp.com/Alfred_${ALFRED_VERSION}.dmg" -o "Alfred.dmg"
+	sudo hdiutil attach Alfred.dmg
+	sudo cp -R "/Volumes/Alfred/Alfred 5.app" /Applications
+	sudo hdiutil detach "/Volumes/Alfred"
+	rm -f "Alfred.dmg"
+fi
+
+# install Mimestream
+echo "installing Mimestream"
+if [[ ! -d /Applications/Mimestream.app ]]; then
+	curl -fsSL "https://download.mimestream.com/Mimestream_1.3.8.dmg" -o "Mimestream.dmg"
+	sudo hdiutil attach Mimestream.dmg
+	sudo cp -R "/Volumes/Mimestream/Mimestream.app" /Applications
+	sudo hdiutil detach "/Volumes/Mimestream"
+	sudo rm -f "Mimestream.dmg"
+fi
+
+# install Spotify
+echo "installing Spotify"
+if [[ ! -d /Applications/Spotify.app ]]; then 
+	curl -fsSL "https://download.scdn.co/Spotify.dmg" -o "Spotify.dmg"
+	sudo hdiutil attach Spotify.dmg
+	sudo cp -R "/Volumes/Spotify/Spotify.app" /Applications
+	sudo hdiutil detach "/Volumes/Spotify"
+	rm -f "Spotify.dmg"
+fi
+
+# install f.lux
+echo "installing f.lux"
+if [[ ! -d /Applications/Flux.app ]]; then
+	curl -fsSL "https://justgetflux.com/mac/Flux.zip" -o "Flux.zip"
+	unzip Flux.zip
+	mv "Flux.app" /Applications
+	rm -f Flux.zip
+fi
+
+# install Telegram
+if [[ ! -d /Applications/Telegram.app ]]; then
+	curl -fsSL "https://osx.telegram.org/updates/Telegram.dmg" -o "Telegram.dmg"
+	sudo hdiutil attach Telegram.dmg
+	sudo cp -R "/Volumes/Telegram/Telegram.app" /Applications
+	sudo hdiutil detach "/Volumes/Telegram"
+	rm -f "Telegram.dmg"
+fi
