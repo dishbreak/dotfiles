@@ -1,6 +1,8 @@
 1password.op-vscode
 amazonwebservices.aws-toolkit-vscode
+austenc.tailwind-docs
 casualjim.gotemplate
+charliermarsh.ruff
 cs50.vscode-presentation-mode
 eamodio.gitlens
 github.copilot
@@ -32,6 +34,7 @@ ms-vscode.sublime-keybindings
 ms-vsliveshare.vsliveshare
 oderwat.indent-rainbow
 redhat.vscode-yaml
+robbowen.synthwave-vscode
 ryanolsonx.zenburn
 simonsiefke.svg-preview
 stkb.rewrap
