@@ -30,6 +30,9 @@ if ! which brew; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
+# add homebrew taps
+brew tap ankitpokhrel/jira-cli
+
 /opt/homebrew/bin/brew install \
 	shellcheck \
 	nvm \
@@ -41,6 +44,7 @@ fi
 	kubectl \
 	postgresql \
 	bitwarden \
+	jira-cli \
 	jq
 
 # install uv
