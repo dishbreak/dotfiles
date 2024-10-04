@@ -1,10 +1,9 @@
 1password.op-vscode
 amazonwebservices.aws-toolkit-vscode
-austenc.tailwind-docs
 casualjim.gotemplate
-charliermarsh.ruff
 cs50.vscode-presentation-mode
 eamodio.gitlens
+editorconfig.editorconfig
 github.copilot
 github.copilot-chat
 github.vscode-github-actions
@@ -12,7 +11,7 @@ github.vscode-pull-request-github
 golang.go
 grapecity.gc-excelviewer
 hashicorp.terraform
-leodevbro.blockman
+mechatroner.rainbow-csv
 ms-azuretools.vscode-docker
 ms-kubernetes-tools.vscode-kubernetes-tools
 ms-python.black-formatter
@@ -34,7 +33,6 @@ ms-vscode.sublime-keybindings
 ms-vsliveshare.vsliveshare
 oderwat.indent-rainbow
 redhat.vscode-yaml
-robbowen.synthwave-vscode
 ryanolsonx.zenburn
 simonsiefke.svg-preview
 stkb.rewrap
