@@ -44,6 +44,7 @@ brew tap ankitpokhrel/jira-cli
 	kubectl \
 	postgresql \
 	bitwarden \
+	ngrok/ngrok/ngrok \
 	jira-cli \
 	jq
 
