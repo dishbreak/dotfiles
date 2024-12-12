@@ -46,6 +46,7 @@ brew tap ankitpokhrel/jira-cli
 	bitwarden \
 	ngrok/ngrok/ngrok \
 	jira-cli \
+	helm \
 	jq
 
 # install uv
