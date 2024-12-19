@@ -2,6 +2,7 @@
 amazonwebservices.aws-toolkit-vscode
 casualjim.gotemplate
 cs50.vscode-presentation-mode
+davidnussio.vscode-jq-playground
 eamodio.gitlens
 editorconfig.editorconfig
 github.copilot
@@ -11,6 +12,7 @@ github.vscode-pull-request-github
 golang.go
 grapecity.gc-excelviewer
 hashicorp.terraform
+jq-syntax-highlighting.jq-syntax-highlighting
 mechatroner.rainbow-csv
 ms-azuretools.vscode-docker
 ms-kubernetes-tools.vscode-kubernetes-tools
