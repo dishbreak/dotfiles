@@ -47,6 +47,8 @@ brew tap ankitpokhrel/jira-cli
 	ngrok/ngrok/ngrok \
 	jira-cli \
 	helm \
+	csvkit \
+	opslevel/tap/cli \
 	jq
 
 # install uv
