@@ -49,6 +49,7 @@ brew tap ankitpokhrel/jira-cli
 	helm \
 	csvkit \
 	opslevel/tap/cli \
+	coreutils \
 	jq
 
 # install uv
