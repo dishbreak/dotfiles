@@ -85,6 +85,13 @@ sudo installer -pkg AWSCLIV2.pkg -target /
 rm -f "AWSCLIV2.pkg"
 fi
 
+# AWS SAM CLI
+if ! which sam; then
+curl "https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-macos-arm64.pkg" -o "aws-sam-cli-macos-arm64.pkg"
+sudo installer -pkg "aws-sam-cli-macos-arm64.pkg" -target /
+rm -f "aws-sam-cli-macos-arm64.pkg"
+fi
+
 OMZ_DIR="$HOME/.oh-my-zsh"
 if [[ -d "$OMZ_DIR" ]]; then 
     echo "removing oh-my-zsh dir"
