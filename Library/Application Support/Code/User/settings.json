@@ -91,5 +91,6 @@
     "python": true
   },
   "go.lintTool": "golangci-lint",
-  "git.blame.editorDecoration.enabled": true
+  "git.blame.editorDecoration.enabled": true,
+  "terminal.integrated.copyOnSelection": true
 }
