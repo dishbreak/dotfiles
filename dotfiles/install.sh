@@ -50,7 +50,9 @@ brew tap ankitpokhrel/jira-cli
 	csvkit \
 	opslevel/tap/cli \
 	coreutils \
-	jq
+	jq \
+	yq \
+	kube-ps1
 
 # install uv
 # NB we set NO_MODIFY_PATH because our dotfile should already have that set up.

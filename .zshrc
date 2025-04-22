@@ -16,16 +16,8 @@ if [[ "$(uname -m)" == "arm64" ]]; then
   PATH="${PATH}:/opt/homebrew/bin"
 fi
 
-BULLETTRAIN_PROMPT_ORDER=(
-time
-status
-dir
-screen
-git
-cmd_exec_time
-)
-
-BULLETTRAIN_CONTEXT_HOSTNAME=local
+source "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh"
+PS1='$(kube_ps1)'$PS1
 
 PATH=${HOME}/bin:${PATH}
 PATH=${HOME}/scripts:${PATH}
@@ -84,6 +76,11 @@ function dockerlogin(){
         "$ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com"
 }
 
+function get_acct_id() {
+    asl
+    aws sts get-caller-identity --profile "$1.admin" --query Account --output text --no-cli-pager
+}
+
 export SF_ROLE=TERRAFORMOPS
 export SF_REGION=us-east-1
 export SF_ACCOUNT=nerdwallet
@@ -95,6 +92,23 @@ alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 function mypath() {
 	echo $PATH | tr ':' '\n'
+}
+
+function impersonate() {
+  profile=$1
+  role_arn=$2
+
+  credentials=$(aws sts assume-role \
+  --role-arn "$role_arn" \
+  --role-session-name "$(whoami)-shell-session" \
+  --profile "$profile")
+
+  AWS_ACCESS_KEY_ID=$(echo "$credentials" | jq -r '.Credentials.AccessKeyId')
+  AWS_SECRET_ACCESS_KEY=$(echo "$credentials" | jq -r '.Credentials.SecretAccessKey')
+  AWS_SESSION_TOKEN=$(echo "$credentials" | jq -r '.Credentials.SessionToken')
+  export AWS_ACCESS_KEY_ID
+  export AWS_SECRET_ACCESS_KEY
+  export AWS_SESSION_TOKEN
 }
 
 alias k=kubectl
@@ -115,3 +129,5 @@ export PATH="$HOME/.cargo/bin:$PATH"
 [ -s "/Users/vishal/.scm_breeze/scm_breeze.sh" ] && source "/Users/vishal/.scm_breeze/scm_breeze.sh"
 
 export PATH="/opt/podman/bin:$PATH"
+
+export PATH="${HOME}/.pyenv/shims:$PATH"
