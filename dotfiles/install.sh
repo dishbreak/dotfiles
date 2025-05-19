@@ -52,6 +52,7 @@ brew tap ankitpokhrel/jira-cli
 	coreutils \
 	jq \
 	yq \
+	gitu \
 	kube-ps1
 
 # install uv
@@ -220,3 +221,8 @@ if [[ ! -d /Applications/Telegram.app ]]; then
 	sudo hdiutil detach "/Volumes/Telegram"
 	rm -f "Telegram.dmg"
 fi
+
+#install Terraform
+echo "installing Terraform"
+if [[ ! -f "$HOME/bin/terraform" ]]; then
+	curl 
