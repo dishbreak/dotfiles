@@ -20,4 +20,6 @@
 
 ## Code Style
 - Follow existing code conventions in the project
+- All files should include a newline at the end.
+
 
