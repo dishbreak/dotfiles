@@ -21,6 +21,3 @@
 ## Code Style
 - Follow existing code conventions in the project
 
-## lodge
-The lodge repository is our GitOps repo and we use it to manage kubernetes clusters. When making PRs in this repo, always name the service in parentheses as part of the prefix. For example "chore(financial-data-platform): update chart dependencies in prod"
-In the lodge repository, always clarify in the PR title what environment is being changed. the environments are "stage/preview", "stage", and "prod".  
