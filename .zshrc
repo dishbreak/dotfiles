@@ -23,6 +23,7 @@ PATH=${HOME}/bin:${PATH}
 PATH=${HOME}/scripts:${PATH}
 PATH=/usr/local/go/bin:${PATH}
 PATH=/usr/local/aws/bin:${PATH}
+PATH=/opt/homebrew/opt/mysql-client/bin:${PATH}
 
 setopt sh_word_split
 
@@ -124,10 +125,14 @@ eval "$(direnv hook zsh)"
   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
-export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 [ -s "/Users/vishal/.scm_breeze/scm_breeze.sh" ] && source "/Users/vishal/.scm_breeze/scm_breeze.sh"
 
 export PATH="/opt/podman/bin:$PATH"
 
 export PATH="${HOME}/.pyenv/shims:$PATH"
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
