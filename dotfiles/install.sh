@@ -34,26 +34,27 @@ fi
 brew tap ankitpokhrel/jira-cli
 
 /opt/homebrew/bin/brew install \
-	shellcheck \
-	nvm \
 	1password-cli \
-	gh \
-	direnv \
-	derailed/k9s/k9s \
-	kubectx \
-	kubectl \
-	postgresql \
 	bitwarden \
-	ngrok/ngrok/ngrok \
-	jira-cli \
-	helm \
-	csvkit \
-	opslevel/tap/cli \
 	coreutils \
-	jq \
-	yq \
+	csvkit \
+	derailed/k9s/k9s \
+	direnv \
+	gh \
 	gitu \
-	kube-ps1
+	helm \
+	jira-cli \
+	jq \
+	kube-ps1 \
+	kubectl \
+	kubectx \
+	mysql-client \
+	ngrok/ngrok/ngrok \
+	nvm \
+	opslevel/tap/cli \
+	postgresql \
+	shellcheck \
+	yq 
 
 # install uv
 # NB we set NO_MODIFY_PATH because our dotfile should already have that set up.
